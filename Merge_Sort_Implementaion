@@ -1,3 +1,4 @@
+# Goal is to sort the array. 
 # Merge two sorted sub-lists arr[low .. mid] and arr[mid + 1 .. high]
 
 def merge_sort_ar(ar, ta, low, mid, high):
