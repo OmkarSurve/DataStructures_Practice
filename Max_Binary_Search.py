@@ -6,16 +6,19 @@ Input: array[] = {3, 5,15, 50, 11, 10, 8, 6}
 
 
 def max_bin(ar, low, high):
-
+    
+    # End case
     if ar[low] == ar[high]:
         return ar[low]
-
+    
+    # End case
     if high == low + 1:
         if ar[high] > ar[low]:
             return ar[high]
 
         return ar[low]
-
+    
+    # Divide the array till we get the end case
     mid = low + (high-low)//2
 
     if (ar[mid-1] < ar[mid]) and (ar[mid] > ar[mid+1]):
