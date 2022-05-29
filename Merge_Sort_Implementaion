@@ -1,0 +1,61 @@
+# Merge two sorted sub-lists arr[low .. mid] and arr[mid + 1 .. high]
+
+def merge_sort_ar(ar, ta, low, mid, high):
+
+    ci = low
+    lp = low
+    hp = mid + 1
+    
+    # While there are elements in the left and right runs
+    while (lp <= mid and hp <= high):
+        if ar[lp] <= ar[hp]:
+            ta[ci] = ar[lp]
+            ci += 1
+            lp += 1
+        else:
+            ta[ci] = ar[hp]
+            ci += 1
+            hp += 1
+            
+    # Copy remaining elements
+    while(lp <= mid):
+        ta[ci] = ar[lp]
+        ci += 1
+        lp += 1
+
+    while(hp <= high):
+        ta[ci] = ar[hp]
+        ci += 1
+        hp += 1
+        
+    # copy back to the original list to reflect sorted order
+    for i in range(low, high+1):
+        ar[i] = ta[i]
+
+# Sort list A [low..high] using auxiliary list aux
+def sort_ar(ar, ta, low, high):
+    
+    # Base case
+    if low == high:
+        return
+
+    mid = (low + high) // 2
+    
+    # recursively split runs into two halves until run size == 1,
+  	# then merge them and return back up the call chain
+    
+    sort_ar(ar, ta, low, mid)               # split / merge left  half
+    sort_ar(ar, ta, mid+1, high)            # split / merge right  half
+    merge_sort_ar(ar, ta, low, mid, high)   # merge the two half runs
+
+
+if __name__ == '__main__':
+
+    ar = [34, 1, 32, 45, 24, 90, 8, 21, 64]
+    ta = ar.copy()
+    print(ar)
+    low = 0
+    high = len(ar) - 1
+    sort_ar(ar, ta, low, high)
+
+    print(ar)
